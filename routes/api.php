@@ -27,3 +27,6 @@ Route::group(['namespace' => 'Auth'], static function () {
         Route::get('user', 'AuthController@user');
     });
 });
+
+Route::apiResource('messages', 'MessageController')
+    ->middleware('auth:api');
