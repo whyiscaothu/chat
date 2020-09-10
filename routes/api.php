@@ -30,3 +30,6 @@ Route::group(['namespace' => 'Auth'], static function () {
 
 Route::apiResource('messages', 'MessageController')
     ->middleware('auth:api');
+
+Route::get('users', 'UserController@getListUser')
+    ->middleware('auth:api');
