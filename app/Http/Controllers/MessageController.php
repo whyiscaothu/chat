@@ -29,17 +29,17 @@ class MessageController extends Controller
      */
     public function store(Request $request)
     {
-        $user_id = Auth::user()->id;
-        $to_user_id = 1;
+        $userId = Auth::user()->id;
+        $toUserId = $request->post('toUserId');
         $inputMessage = $request->post('message');
 
 
         $message = Message::create([
-            'user_id' => $user_id,
-            'to_user_id' => $to_user_id,
+            'user_id' => $userId,
+            'to_user_id' => $toUserId,
             'message' => $inputMessage
         ]);
-        event(new ChatEvent($message));
+        event(new ChatEvent($message, $toUserId));
         return $message;
 
     }
