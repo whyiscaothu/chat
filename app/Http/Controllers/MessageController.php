@@ -18,16 +18,19 @@ class MessageController extends Controller
      */
     public function index()
     {
-        return Message::all();
+        $toUserId = \request()->post('toUserId');
+        return Message::where('user_id', Auth::user()->id)
+            ->where('to_user_id', $toUserId)
+            ->get();
     }
 
     /**
      * Store a newly created resource in storage.
      *
      * @param Request $request
-     * @return Response
+     * @return Message
      */
-    public function store(Request $request)
+    public function store(Request $request): Message
     {
         $userId = Auth::user()->id;
         $toUserId = $request->post('toUserId');
