@@ -18,7 +18,7 @@ class MessageController extends Controller
      */
     public function index()
     {
-        $toUserId = \request()->post('toUserId');
+        $toUserId = \request()->header('toUserId');
         return Message::where('user_id', Auth::user()->id)
             ->where('to_user_id', $toUserId)
             ->get();
