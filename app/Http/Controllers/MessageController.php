@@ -20,7 +20,7 @@ class MessageController extends Controller
     {
         $toUserId = \request()->header('toUserId');
         return Message::where('user_id', Auth::user()->id)
-            ->where('to_user_id', $toUserId)
+            ->orWhere('user_id', $toUserId)
             ->get();
     }
 
