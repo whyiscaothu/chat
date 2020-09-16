@@ -18,7 +18,7 @@ class CreateMessagesTable extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained();
             $table->integer('to_user_id')->default(1);
-            $table->string('message');
+            $table->text('message');
             $table->timestamps();
         });
     }

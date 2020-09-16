@@ -19,8 +19,14 @@ class MessageController extends Controller
     public function index()
     {
         $toUserId = \request()->header('toUserId');
-        return Message::where('user_id', Auth::user()->id)
-            ->orWhere('user_id', $toUserId)
+        return Message::where([
+            ['user_id', '=', Auth::user()->id],
+            ['to_user_id', '=', $toUserId],
+        ])
+            ->orWhere([
+                ['user_id', '=', $toUserId],
+                ['to_user_id', '=', Auth::user()->id],
+            ])
             ->get();
     }
 
